@@ -3,15 +3,15 @@
 import java.net.InetSocketAddress;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.logging.Logger;
 
 import Server.constant.ServerConstant;
 import Server.router.RouteManager;
 import com.sun.net.httpserver.HttpServer;
 
-public class Server implements Runnable {
-    private static final Logger LOGGER = Logger.getLogger(Server.class.getName());
+import Logger.AppLogger;
 
+public class Server implements Runnable {
+    private static final AppLogger LOGGER = AppLogger.getInstance();
     private static final ClassLoader loader = Server.class.getClassLoader();
 
     private static Server server;
@@ -41,9 +41,9 @@ public class Server implements Runnable {
     public void run() {
 		// This is incase we run the server from the main class rather than the server class;
 		if (server == null) {
-			server =  Main.getServer();
-			port = Main.getServerPort();
-			serverHome = Main.getServerHome();
+			server =  App.getServer();
+			port = App.getServerPort();
+			serverHome = App.getServerHome();
 		}
 
         try {

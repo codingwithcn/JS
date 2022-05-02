@@ -12,10 +12,10 @@
         },
         {
             "type": "java",
-            "name": "Launch Main Test",
+            "name": "Launch App",
             "request": "launch",
-            "mainClass": "Main",
-            "projectName": "JS-Demo"
+            "mainClass": "App",
+            "projectName": "regin-colledge"
         }
     ]
 }

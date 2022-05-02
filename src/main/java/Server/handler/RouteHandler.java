@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.logging.Logger;
 import java.util.zip.GZIPOutputStream;
 
 import Server.constant.ServerConstant;
@@ -21,12 +20,15 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
 import org.json.JSONObject;
+
+import Logger.AppLogger;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 
 public abstract class RouteHandler implements HttpHandler {
-    private static final Logger LOGGER = Logger.getLogger(RouteHandler.class.getName());
+    private final AppLogger logger = AppLogger.getInstance();
 
     private final String pathToRoot;
     private final boolean gzippable;
@@ -52,8 +54,6 @@ public abstract class RouteHandler implements HttpHandler {
         }
 
         handler404 = new Handler404(gzippable, casheable);
-
-        LOGGER.info("RouteHandler initialized");
     }
 
     /**
@@ -77,6 +77,10 @@ public abstract class RouteHandler implements HttpHandler {
         return new JSONObject("data: {}");
     }
 
+    public AppLogger getLogger() {
+        return logger;
+    }
+    
     private static JSONObject parseQuery(String query) throws UnsupportedEncodingException {
         if (query != null) {
             return new JSONObject(" { data : " + query + " }");
