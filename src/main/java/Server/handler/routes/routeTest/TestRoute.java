@@ -1,7 +1,6 @@
-package Server.router.routes.routeTest;
+package Server.handler.routes.routeTest;
 
 import java.io.IOException;
-import java.lang.System.Logger;
 
 import Server.handler.RouteHandler;
 
@@ -12,7 +11,7 @@ import Server.utils.Session.*;
 public class TestRoute extends RouteHandler {
 
     public TestRoute(boolean gzippable, boolean casheable) throws IOException {
-        super(gzippable, casheable);
+        super();
         //TODO Auto-generated constructor stub
         getLogger().info("TestRoute Handler initialized");
     }
@@ -46,6 +45,24 @@ public class TestRoute extends RouteHandler {
     public void DeleteHandler(HttpExchange he) throws IOException {
         // TODO Auto-generated method stub
         
+    }
+
+    @Override
+    public boolean isGzippable() {
+        // TODO Auto-generated method stub
+        return true;
+    }
+
+    @Override
+    public boolean isCasheable() {
+        // TODO Auto-generated method stub
+        return true;
+    }
+
+    @Override
+    public String getRoute() {
+        // TODO Auto-generated method stub
+        return "/testRoute";
     }
     
 }

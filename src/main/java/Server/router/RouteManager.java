@@ -13,6 +13,8 @@ import Server.router.routes.routeTest.TestRoute;
 
 import com.sun.net.httpserver.HttpExchange;
 
+import net.sourceforge.stripes.util.ResolverUtil;
+
 public class RouteManager implements HttpHandler {
 
     private static RouteManager instance;
@@ -30,7 +32,13 @@ public class RouteManager implements HttpHandler {
         // Load in all the route handlers here
 
         // Example:
-        this.addHandler("/testRoute", new TestRoute(true, true));
+        //this.addHandler("/testRoute", new TestRoute(true, true));
+
+        ResolverUtil<RouteHandler> resolver = new ResolverUtil<RouteHandler>();
+
+        resolver.findImplementations(Re, packageNames)
+
+
     }
 
     public static RouteManager getInstance() throws IOException {

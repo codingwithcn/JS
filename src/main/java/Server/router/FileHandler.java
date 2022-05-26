@@ -9,7 +9,7 @@ import Server.handler.RouteHandler;
 public class FileHandler extends RouteHandler {
 
     public FileHandler(boolean gzippable, boolean casheable) throws IOException {
-        super(gzippable, casheable);
+        super();
         //TODO Auto-generated constructor stub
     }
 
@@ -35,6 +35,24 @@ public class FileHandler extends RouteHandler {
     public void DeleteHandler(HttpExchange he) throws IOException {
         // TODO Auto-generated method stub
         
+    }
+
+    @Override
+    public boolean isGzippable() {
+        // TODO Auto-generated method stub
+        return true;
+    }
+
+    @Override
+    public boolean isCasheable() {
+        // TODO Auto-generated method stub
+        return true;
+    }
+
+    @Override
+    public String getRoute() {
+        // TODO Auto-generated method stub
+        return "/file";
     }
     
 }

@@ -36,12 +36,12 @@ public abstract class RouteHandler implements HttpHandler {
     private final Map<String, Resource> resources = new HashMap<>();
     private Handler404 handler404;
     
-    public RouteHandler(boolean gzippable, boolean casheable) throws IOException {
+    public RouteHandler() throws IOException {
         this.pathToRoot = ServerConstant.getPathToRoot();
 
-        this.gzippable = gzippable;
+        this.gzippable = isGzippable();
 
-        this.casheable = casheable;
+        this.casheable = isCasheable();
 
         File[] files =  new File(pathToRoot).listFiles();
 
@@ -138,6 +138,12 @@ public abstract class RouteHandler implements HttpHandler {
     public abstract void PutHandler(HttpExchange he) throws IOException;
 
     public abstract void DeleteHandler(HttpExchange he) throws IOException;
+
+    public abstract boolean isGzippable();
+
+    public abstract boolean isCasheable();
+
+    public abstract String getRoute();
 
     public void HeadHandler(HttpExchange he) throws IOException {
         Set<Map.Entry<String, List<String>>> entries = he.getRequestHeaders().entrySet();
