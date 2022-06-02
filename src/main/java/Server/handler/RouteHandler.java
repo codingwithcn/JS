@@ -131,13 +131,21 @@ public abstract class RouteHandler implements HttpHandler {
         }
     }
 
-    public abstract void PostHandler(HttpExchange he) throws IOException;
+    public void PostHandler(HttpExchange he) throws IOException {
+        handler404.server404(he, ServerConstant.Error404File, resources);
+    }
 
-    public abstract void GetHandler(HttpExchange he) throws IOException;
+    public void GetHandler(HttpExchange he) throws IOException {
+        handler404.server404(he, ServerConstant.Error404File, resources);
+    }
 
-    public abstract void PutHandler(HttpExchange he) throws IOException;
+    public void PutHandler(HttpExchange he) throws IOException {
+        handler404.server404(he, ServerConstant.Error404File, resources);
+    }
 
-    public abstract void DeleteHandler(HttpExchange he) throws IOException;
+    public void DeleteHandler(HttpExchange he) throws IOException {
+        handler404.server404(he, ServerConstant.Error404File, resources);
+    }
 
     public abstract boolean isGzippable();
 

@@ -9,7 +9,7 @@ import com.sun.net.httpserver.HttpHandler;
 
 import Logger.AppLogger;
 import Server.handler.RouteHandler;
-import Server.router.routes.routeTest.TestRoute;
+import Server.handler.routes.routeTest.TestRoute;
 
 import com.sun.net.httpserver.HttpExchange;
 
@@ -36,9 +36,20 @@ public class RouteManager implements HttpHandler {
 
         ResolverUtil<RouteHandler> resolver = new ResolverUtil<RouteHandler>();
 
-        resolver.findImplementations(Re, packageNames)
+        resolver.findImplementations(RouteHandler.class, RouteHandler.class.getPackage().getName());
 
-
+        for (Class<? extends RouteHandler> clazz : resolver.getClasses()) {
+            try {
+                if (!clazz.getName().equals("Server.handler.RouteHandler")) {
+                    RouteHandler handler = clazz.getDeclaredConstructor().newInstance();
+                    this.addHandler(handler.getRoute(), handler);
+                    LOGGER.info(handler.getRoute() + " route handler loaded");
+                }
+            }catch(Exception e) {
+                LOGGER.info("Error loading route handler: " + clazz.getName());
+                e.printStackTrace();
+            }
+        }
     }
 
     public static RouteManager getInstance() throws IOException {
